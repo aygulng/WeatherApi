@@ -7,6 +7,7 @@ namespace WeatherApi.Services
     public class WeatherService : IWeatherService
     {
         private readonly string ApiKey;
+        private readonly string ApiUrl;
 
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -14,13 +15,14 @@ namespace WeatherApi.Services
         {
             ApiKey = weatherSettings.Value.ApiKey;
             _httpClientFactory = httpClientFactory;
+            ApiUrl = weatherSettings.Value.ApiUrl;
         }
 
         public async Task<WeatherForecast?> GetCurrentWeatherForCity(string city)
         {
             HttpClient client = _httpClientFactory.CreateClient("weather");
 
-            var response = await client.GetAsync($"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={ApiKey}");
+            var response = await client.GetAsync($"{ApiUrl}/data/2.5/weather?q={city}&units=metric&appid={ApiKey}");
 
             if (response.IsSuccessStatusCode)
             {

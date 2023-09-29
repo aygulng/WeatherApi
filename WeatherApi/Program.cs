@@ -9,21 +9,18 @@ namespace WeatherApi
 
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
 
-            var CorsSettings = "_corsSettings";
-            
+            var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddSingleton<IWeatherService, WeatherService>();
             builder.Services.AddHttpClient("weather");
             builder.Services.Configure<WeatherSettings>(builder.Configuration);
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
 
-           
+
+
 
             if (app.Environment.IsDevelopment())
             {
@@ -37,8 +34,6 @@ namespace WeatherApi
 
 
             app.MapControllers();
-
-            app.UseCors(CorsSettings);
 
             app.Run();
         }
