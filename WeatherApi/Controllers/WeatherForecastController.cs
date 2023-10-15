@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WeatherApi.Models;
 using WeatherApi.Services;
 
 namespace WeatherApi.Controllers
@@ -13,9 +14,7 @@ namespace WeatherApi.Controllers
             _weatherService = weatherService;
         }
 
-
         [HttpGet("weather/{city}")]
-
         public async Task<IActionResult> GetWeather(string city)
         {
             var weather = await _weatherService.GetCurrentWeatherForCity(city);
@@ -29,5 +28,13 @@ namespace WeatherApi.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("cities")]
+        public async Task<ActionResult<List<WeatherForecast>>> GetCitiesWithWeather()
+        {
+            var citiesWithWeather = await _weatherService.GetCitiesWithWeather();
+            return Ok(citiesWithWeather);
+        }
+
     }
 }

@@ -2,24 +2,15 @@
 {
     public class WeatherForecast
     {
-        public Coord? coord { get; set; }
+        public string Name { get; set; }
         public List<Weather?> weather { get; set; }
         public Main? main { get; set; }
         public int visibility { get; set; }
         public Wind? wind { get; set; }
         public Clouds? clouds { get; set; }
-        public int dt { get; set; }
-        public Sys? sys { get; set; }
         public int id { get; set; }
-        public string Name { get; set; }
-        public int cod { get; set; }
 
-        public class Coord
-        {
-            public double Lon { get; set; }
-            public double Lat { get; set; }
-        }
-
+    }
         public class Weather
         {
             public int Id { get; set; }
@@ -48,16 +39,7 @@
             public int All { get; set; }
         }
 
-        public class Sys
-        {
-            public int Type { get; set; }
-            public int Id { get; set; }
-            public double Message { get; set; }
-            public string Country { get; set; } = null!;
-            public int Sunrise { get; set; }
-            public int Sunset { get; set; }
-        }
 
         
     }
-}
+
